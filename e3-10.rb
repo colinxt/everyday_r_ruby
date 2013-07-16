@@ -8,16 +8,18 @@ max_use_duration = 1
 population_range = 10..600
 
 max_number_of_restrooms.each do | num_of_restrooms |
+  data = {}
   population_range.step(10).each do |population_size|
     Person.population.clear
     population_size.times { Person.population << Person.new(rand(max_frequency)+1,
-                                                             rand(use_duration)+1) }
+                                                             rand(max_use_duration)+1) }
     data[population_size] = []
     restrooms = []
     num_of_restrooms.times {restrooms << Restroom.new(facilities_per_restroom) }
     
     DURATION.times do |t|
-      data[population_size] << restrooms.inject(0) {|n,m| n+m.queue.size}
+      restroom_shortest_queue = restrooms.min {|n,m| n.queue.size <=> m.queue.size}
+      data[population_size] << restroom_shortest_queue.queue.size
       restrooms.each {|restroom|
         queue = restroom.queue.clone
         restroom.queue.clear
@@ -38,7 +40,7 @@ max_number_of_restrooms.each do | num_of_restrooms |
     end
   end
 
-  CSV.open('simulation3-#{num_of_restrooms}.csv', 'w') do |csv|
+  CSV.open("simulation3-#{num_of_restrooms}.csv", 'w') do |csv|
     lbl = []  # label, column items
     population_range.step(10).each {|population_size| lbl << population_size}
     csv << lbl
