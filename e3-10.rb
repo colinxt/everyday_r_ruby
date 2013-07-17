@@ -2,7 +2,7 @@ require 'csv'
 require './restroom'
 
 max_frequency = 5
-max_number_of_restrooms = 1..4
+max_number_of_restrooms = 4..4
 facilities_per_restroom = 3
 max_use_duration = 1
 population_range = 10..600
@@ -40,7 +40,7 @@ max_number_of_restrooms.each do | num_of_restrooms |
     end
   end
 
-  CSV.open("simulation3-#{num_of_restrooms}.csv", 'w') do |csv|
+  CSV.open("simulation3-4x3.csv", 'w') do |csv|
     lbl = []  # label, column items
     population_range.step(10).each {|population_size| lbl << population_size}
     csv << lbl

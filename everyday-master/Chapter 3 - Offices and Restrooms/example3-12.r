@@ -8,10 +8,10 @@ df <- function(sim) {
 }
 
 ggplot() + scale_shape_manual(name="Type", values=c(2,3,4,22)) + 
-  geom_smooth(data = df("simulation3"), aes(x=population,y=max)) +
-  geom_point(data  = df("simulation3"), aes(x=population,y=max,shape="max-1x12")) +
-  geom_smooth(data = df("simulation3-4"), aes(x=population,y=max)) +
-  geom_point(data  = df("simulation3-4"), aes(x=population,y=max,shape="max-4x3")) +  
+  geom_smooth(data = df("simulation3-1x12"), aes(x=population,y=max)) +
+  geom_point(data  = df("simulation3-1x12"), aes(x=population,y=max,shape="max-1x12")) +
+  geom_smooth(data = df("simulation3-4x3"), aes(x=population,y=max)) +
+  geom_point(data  = df("simulation3-4x3"), aes(x=population,y=max,shape="max-4x3")) +  
   scale_y_continuous("queue size") +
   scale_x_continuous("population")
 
